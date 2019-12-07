@@ -2,9 +2,9 @@
 #'
 #' @description This package fits the Smooth Threshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
 #'
-#' @param ages Matrix of ages that are used to fit the DSTLT. Each column should represent one cohort.
+#' @param ages Matrix of ages that are used to fit the DSTLT. Each column should represent one cohort. There should not be missing data for any ages between the smallest and largest age.
 #'
-#' @param qxs Matrix of mortality rates that are used to fit the DSTLT. Each column should represent one cohort.
+#' @param qxs Matrix of mortality rates that are used to fit the DSTLT, corresponding to the matrix of ages. Each column should represent one cohort.The qx matrix need not be equal to one for any element; right censoring is accounted for in the likelihood function. Where the highest observed age at death is different across cohorts, elements in the qx matrix should be filled with NA for ages past the highest observed age for each cohort.
 #'
 #' @param startN The first potential threshold age N tested
 #'

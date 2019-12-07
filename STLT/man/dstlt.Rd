@@ -7,9 +7,9 @@
 dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL)
 }
 \arguments{
-\item{ages}{Matrix of ages that are used to fit the DSTLT. Each column should represent one cohort.}
+\item{ages}{Matrix of ages that are used to fit the DSTLT. Each column should represent one cohort. There should not be missing data for any ages between the smallest and largest age.}
 
-\item{qxs}{Matrix of mortality rates that are used to fit the DSTLT. Each column should represent one cohort.}
+\item{qxs}{Matrix of mortality rates that are used to fit the DSTLT, corresponding to the matrix of ages. Each column should represent one cohort.The qx matrix need not be equal to one for any element; right censoring is accounted for in the likelihood function. Where the highest observed age at death is different across cohorts, elements in the qx matrix should be filled with NA for ages past the highest observed age for each cohort.}
 
 \item{startN}{The first potential threshold age N tested}
 

@@ -7,7 +7,7 @@
 stlt(ages, qx, startN = 0, endN = 200, censorAge = NULL)
 }
 \arguments{
-\item{ages}{Vector of ages that are used to fit the STLT}
+\item{ages}{Vector of ages that are used to fit the STLT. There should not be missing data for any ages between the smallest and largest age.}
 
 \item{qx}{Vector of mortality rates that are used to fit the STLT, corresponding to the vector of ages. The qx vector need not be equal to one for any element; right censoring is accounted for in the likelihood function.}
 
