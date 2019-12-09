@@ -4,7 +4,8 @@
 \alias{dstlt}
 \title{Fit the Dyanmic Smooth Threshold Life Table}
 \usage{
-dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL)
+dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL,
+  hessian = FALSE)
 }
 \arguments{
 \item{ages}{Matrix of ages that are used to fit the DSTLT. Each column should represent one cohort. There should not be missing data for any ages between the smallest and largest age.}

@@ -22,7 +22,7 @@
 #
 # @export predict.stlt
 
-stlt<-function(ages,qx,startN=0,endN=200,censorAge=NULL)
+stlt<-function(ages,qx,startN=0,endN=200,censorAge=NULL,hessian=FALSE)
 {
   start=ages[1]
   if (!is.null(censorAge)) {
@@ -69,12 +69,12 @@ stlt<-function(ages,qx,startN=0,endN=200,censorAge=NULL)
     C=exp(exp(beta.hat[2]))
     gam=beta.hat[3]
 
-    lps[N-start]=sum(dx[1:(N-start)]*(-(exp(alpha))/(exp(delta))*((exp(exp(delta)))^x-1)+log(1-exp(-(exp(alpha))/(exp(delta))*(exp(exp(delta)))^x*((exp(exp(delta)))-1)))))+exposures[N-(start-1)]*((-(exp(alpha))/(exp(delta)))*((exp(exp(delta)))^N-1))-lstart*((-(exp(alpha))/(exp(delta)))*((exp(exp(delta)))^start-1))+sum(dx[(N-(start-1)):(which(is.na(qx))[1]-1)]*log((1+gam*((x2-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam)-(1+gam*((x3-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam)))+ltau*log((1+gam*((tau-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam))
+    lps[N-max(start+1,startN)+1]=sum(dx[1:(N-start)]*(-(exp(alpha))/(exp(delta))*((exp(exp(delta)))^x-1)+log(1-exp(-(exp(alpha))/(exp(delta))*(exp(exp(delta)))^x*((exp(exp(delta)))-1)))))+exposures[N-(start-1)]*((-(exp(alpha))/(exp(delta)))*((exp(exp(delta)))^N-1))-lstart*((-(exp(alpha))/(exp(delta)))*((exp(exp(delta)))^start-1))+sum(dx[(N-(start-1)):(which(is.na(qx))[1]-1)]*log((1+gam*((x2-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam)-(1+gam*((x3-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam)))+ltau*log((1+gam*((tau-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam))
   }
 
   stlt=max(lps)
   which.max(lps)
-  N=start+1+which.max(lps)-1
+  N=max(start+1,startN)+which.max(lps)-1
   NSE=(1/((lps[which.max(lps)]-lps[which.max(lps)-1])-(lps[which.max(lps)+1]-lps[which.max(lps)])))^(1/2)
 
   ####refit with optimal N####
@@ -91,29 +91,45 @@ stlt<-function(ages,qx,startN=0,endN=200,censorAge=NULL)
     out <- sum(dx[1:(N-start)]*(-(exp(alpha))/(exp(delta))*((exp(exp(delta)))^x-1)+log(1-exp(-(exp(alpha))/(exp(delta))*(exp(exp(delta)))^x*((exp(exp(delta)))-1)))))+exposures[N-(start-1)]*((-(exp(alpha))/(exp(delta)))*((exp(exp(delta)))^N-1))-lstart*((-(exp(alpha))/(exp(delta)))*((exp(exp(delta)))^start-1))+sum(dx[(N-(start-1)):(which(is.na(qx))[1]-1)]*log((1+gam*((x2-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam)-(1+gam*((x3-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam)))+ltau*log((1+gam*((tau-N)/(1/((exp(exp(delta)))^N*exp(alpha)))))^(-1/gam))
     return(out)
   }
+  if (hessian==TRUE) {
+    theta.start <- c(-11,-3,2)
+    out <- optim(theta.start, log.lik, hessian = TRUE, control = list(fnscale=-1), method="Nelder-Mead")
+    beta.hat <- out$par
+    beta.hat
+    alpha=beta.hat[1]
+    delta=beta.hat[2]
+    B=exp(beta.hat[1])
+    C=exp(exp(beta.hat[2]))
+    gam=beta.hat[3]
+    thet=1/(C^N*B)
+    omega=N-thet/gam
+    var.beta.hat <- diag(solve(-out$hessian))
+    var.beta.hat
+    se.beta.hat <- sqrt(var.beta.hat)
+    se.beta.hat
+    varcovar=solve(-out$hessian)
+    omegavar=t(c(1/(gam*C^N*B),(N*log(C))/(gam*C^N*B),1/(gam^2*C^N*B)))%*%varcovar%*%c(1/(gam*C^N*B),(N*log(C))/(gam*C^N*B),1/(gam^2*C^N*B))
+    omegase=sqrt(omegavar)
 
-  theta.start <- c(-11,-3,2)
-  out <- optim(theta.start, log.lik, hessian = TRUE, control = list(fnscale=-1), method="Nelder-Mead")
-  beta.hat <- out$par
-  beta.hat
-  alpha=beta.hat[1]
-  delta=beta.hat[2]
-  B=exp(beta.hat[1])
-  C=exp(exp(beta.hat[2]))
-  gam=beta.hat[3]
-  thet=1/(C^N*B)
-  omega=N-thet/gam
-  var.beta.hat <- diag(solve(-out$hessian))
-  var.beta.hat
-  se.beta.hat <- sqrt(var.beta.hat)
-  se.beta.hat
-  varcovar=solve(-out$hessian)
-  omegavar=t(c(1/(gam*C^N*B),(N*log(C))/(gam*C^N*B),1/(gam^2*C^N*B)))%*%varcovar%*%c(1/(gam*C^N*B),(N*log(C))/(gam*C^N*B),1/(gam^2*C^N*B))
-  omegase=sqrt(omegavar)
-
-  returnlist=list(coefficients=list(B=B,C=C,gamma=gam,N=N),Omega=omega,Start=start,Tau=tau,SEs=list(B=se.beta.hat[1],C=se.beta.hat[2],gam=se.beta.hat[3],Omega=omegase,N=NSE),qx=qx)
-  class(returnlist)="stlt"
-  return(returnlist)
+    returnlist=list(coefficients=list(B=B,C=C,gamma=gam,N=N),Omega=omega,Start=start,Tau=tau,SEs=list(B=exp(2*alpha)*se.beta.hat[1],C=exp(2*exp(delta))*exp(2*delta)*se.beta.hat[2],gam=se.beta.hat[3],Omega=omegase,N=NSE),qx=qx)
+    class(returnlist)="stlt"
+    return(returnlist)
+  } else {
+    theta.start <- c(-11,-3,2)
+    out <- optim(theta.start, log.lik, hessian = FALSE, control = list(fnscale=-1), method="Nelder-Mead")
+    beta.hat <- out$par
+    beta.hat
+    alpha=beta.hat[1]
+    delta=beta.hat[2]
+    B=exp(beta.hat[1])
+    C=exp(exp(beta.hat[2]))
+    gam=beta.hat[3]
+    thet=1/(C^N*B)
+    omega=N-thet/gam
+    returnlist=list(coefficients=list(B=B,C=C,gamma=gam,N=N),Omega=omega,Start=start,Tau=tau,qx=qx)
+    class(returnlist)="stlt"
+    return(returnlist)
+  }
 }
 
 

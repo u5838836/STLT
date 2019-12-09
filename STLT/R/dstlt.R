@@ -22,7 +22,7 @@
 #
 # @export predict.dstlt
 
-dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL)
+dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE)
 {
   ages=rbind(ages,NA)
   if (!is.null(censorAge)) {
@@ -52,7 +52,7 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL)
 
   #####choosing N####
 
-  lps=rep(0,2)
+  lps=rep(0,1)
   for (N in startN:endN) {
 
     x=start:(N-1)
@@ -88,12 +88,12 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL)
     for (t in 1:periods) {
       timelike[t] <- sum(dxs[1:(N-start),t]*(-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t))*(((thet*exp(a+b*t))^(-1/N))^x-1)+log(1-exp(-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t))*((thet*exp(a+b*t))^(-1/N))^x*(((thet*exp(a+b*t))^(-1/N))-1)))))+exposuress[N-(start-1),t]*((-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t)))*(((thet*exp(a+b*t))^(-1/N))^N-1))-exposuress[1,t]*((-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t)))*(((thet*exp(a+b*t))^(-1/N))^start-1))+sum(dxs[(N-(start-1)):(which(is.na(qxs[,t]))[1]-1),t]*log((1+gam*((x2[!is.na(x2[,t]),t]-N)/(1/(((thet*exp(a+b*t))^(-1/N))^N*exp(a+b*t)))))^(-1/gam)-(1+gam*((x3[!is.na(x3[,t]),t]-N)/(1/(((thet*exp(a+b*t))^(-1/N))^N*exp(a+b*t)))))^(-1/gam)))+ltaus[t]*log((1+gam*((taus[t]-N)/(1/(((thet*exp(a+b*t))^(-1/N))^N*exp(a+b*t)))))^(-1/gam))
     }
-    lps[N-84]=sum(timelike)
+    lps[N-startN+1]=sum(timelike)
   }
 
   DSTLTLP=max(lps)
   which.max(lps)
-  N=85+which.max(lps)-1
+  N=startN+which.max(lps)-1
   NSE=(1/((lps[which.max(lps)]-lps[which.max(lps)-1])-(lps[which.max(lps)+1]-lps[which.max(lps)])))^(1/2)
 
   ####refit with optimal N####
@@ -118,21 +118,35 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL)
     out=sum(timelike)
     return(out)
   }
-
-  theta.start <- c(-11,-2,3,2)
-  out <- optim(theta.start, log.lik, hessian = TRUE, control = list(fnscale=-1), method="Nelder-Mead")
-  beta.hat <- out$par
-  beta.hat
-  a=beta.hat[1]
-  b=beta.hat[2]
-  thet=beta.hat[3]
-  gam=beta.hat[4]
-  omega=N-thet/gam
-  var.beta.hat <- diag(solve(-out$hessian))
-  se.beta.hat <- sqrt(var.beta.hat)
-  returnlist=list(coefficients=list(a=a,b=b,theta=thet,gamma=gam,N=N),Omega=omega,Start=start,Taus=taus,SEs=list(a=se.beta.hat[1],b=se.beta.hat[2],theta=se.beta.hat[3],gamma=se.beta.hat[4],N=NSE),qxs=qxs,periods=periods)
-  class(returnlist)="dstlt"
-  return(returnlist)
+  if (hessian==TRUE) {
+    theta.start <- c(-11,-2,3,2)
+    out <- optim(theta.start, log.lik, hessian = TRUE, control = list(fnscale=-1), method="Nelder-Mead")
+    beta.hat <- out$par
+    beta.hat
+    a=beta.hat[1]
+    b=beta.hat[2]
+    thet=beta.hat[3]
+    gam=beta.hat[4]
+    omega=N-thet/gam
+    var.beta.hat <- diag(solve(-out$hessian))
+    se.beta.hat <- sqrt(var.beta.hat)
+    returnlist=list(coefficients=list(a=a,b=b,theta=thet,gamma=gam,N=N),Omega=omega,Start=start,Taus=taus,SEs=list(a=se.beta.hat[1],b=se.beta.hat[2],theta=se.beta.hat[3],gamma=se.beta.hat[4],N=NSE),qxs=qxs,periods=periods)
+    class(returnlist)="dstlt"
+    return(returnlist)
+  } else {
+    theta.start <- c(-11,-2,3,2)
+    out <- optim(theta.start, log.lik, hessian = FALSE, control = list(fnscale=-1), method="Nelder-Mead")
+    beta.hat <- out$par
+    beta.hat
+    a=beta.hat[1]
+    b=beta.hat[2]
+    thet=beta.hat[3]
+    gam=beta.hat[4]
+    omega=N-thet/gam
+    returnlist=list(coefficients=list(a=a,b=b,theta=thet,gamma=gam,N=N),Omega=omega,Start=start,Taus=taus,qxs=qxs,periods=periods)
+    class(returnlist)="dstlt"
+    return(returnlist)
+  }
 }
 
 
