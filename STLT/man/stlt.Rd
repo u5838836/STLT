@@ -17,6 +17,8 @@ stlt(ages, qx, startN = 0, endN = 200, censorAge = NULL,
 \item{endN}{The last potential threshold age N tested}
 
 \item{censorAge}{The age at which to right-censor observations}
+
+\item{hessian}{set to TRUE for standard errors}
 }
 \value{
 A model object of class "stlt"

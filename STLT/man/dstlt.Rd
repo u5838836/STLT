@@ -17,6 +17,8 @@ dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL,
 \item{endN}{The last potential threshold age N tested}
 
 \item{censorAge}{The age at which to right-censor observations}
+
+\item{hessian}{set to TRUE for standard errors}
 }
 \description{
 This package fits the Smooth Threshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.

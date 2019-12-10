@@ -12,6 +12,8 @@
 #'
 #' @param censorAge The age at which to right-censor observations
 #'
+#' @param hessian set to TRUE for standard errors
+#'
 #' @return A model object of class "stlt"
 #'
 #' @examples stlt(60:100,seq(0.1,0.5,0.01))
