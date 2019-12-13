@@ -4,7 +4,7 @@
 \alias{plot.dstlt}
 \title{Plot the Dyanmic Smooth Threshold Life Table}
 \usage{
-\method{plot}{dstlt}(x, ...)
+\method{plot}{dstlt}(x, main = "", ...)
 }
 \arguments{
 \item{x}{a model object of class dstlt}
@@ -13,7 +13,7 @@
 Plot fitted DSTLT lines for the cohorts used to fit the model along with corresponding observed qx
 }
 \examples{
-dstlt.mod<-dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01))
+dstlt.mod<-dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01)))
 plot(dstlt.mod)
 
 }

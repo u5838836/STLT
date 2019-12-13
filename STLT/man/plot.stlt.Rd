@@ -4,7 +4,7 @@
 \alias{plot.stlt}
 \title{Plot the Smooth Threshold Life Table}
 \usage{
-\method{plot}{stlt}(x, ...)
+\method{plot}{stlt}(x, main = "", ...)
 }
 \arguments{
 \item{x}{An stlt model object}

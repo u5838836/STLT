@@ -11,7 +11,7 @@
 #' @return A vector of predicted qx for a given numeric time period under the fitted DSTLT model
 #'
 #' @examples
-#' dstlt.mod<-dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01))
+#' dstlt.mod<-dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01)))
 #' predict.dstlt(dstlt.mod,65:90,2)
 #'
 #' @export
