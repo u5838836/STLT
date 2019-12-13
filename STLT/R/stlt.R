@@ -12,7 +12,9 @@
 #'
 #' @param censorAge The age at which to right-censor observations
 #'
-#' @param hessian set to TRUE for standard errors
+#' @param hessian Set to TRUE for standard errors
+#'
+#' @param radix The radix for the hypothetical cohort; affects standard errors
 #'
 #' @return A model object of class "stlt"
 #'
@@ -24,14 +26,13 @@
 #
 # @export predict.stlt
 
-stlt<-function(ages,qx,startN=0,endN=200,censorAge=NULL,hessian=FALSE)
+stlt<-function(ages,qx,startN=0,endN=200,censorAge=NULL,hessian=FALSE,radix=50000)
 {
   start=ages[1]
   if (!is.null(censorAge)) {
-  qx=qx[1:which.(ages==censorAge)]
+  qx=qx[1:which(ages==censorAge)]
   }
   qx=append(qx,NA)
-  radix=100000
   lstart=radix
   dx=rep(0,50)
   exposures=rep(0,50)

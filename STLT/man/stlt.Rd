@@ -5,7 +5,7 @@
 \title{Fit the Smooth Threshold Life Table}
 \usage{
 stlt(ages, qx, startN = 0, endN = 200, censorAge = NULL,
-  hessian = FALSE)
+  hessian = FALSE, radix = 50000)
 }
 \arguments{
 \item{ages}{Vector of ages that are used to fit the STLT. There should not be missing data for any ages between the smallest and largest age.}
@@ -18,7 +18,9 @@ stlt(ages, qx, startN = 0, endN = 200, censorAge = NULL,
 
 \item{censorAge}{The age at which to right-censor observations}
 
-\item{hessian}{set to TRUE for standard errors}
+\item{hessian}{Set to TRUE for standard errors}
+
+\item{radix}{The radix for the hypothetical cohort; affects standard errors}
 }
 \value{
 A model object of class "stlt"

@@ -14,6 +14,8 @@
 #'
 #' @param hessian set to TRUE for standard errors
 #'
+#' @param radix The radix for the hypothetical cohort; affects standard errors
+#'
 #' @return NULL
 #'
 #' @examples dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.11,0.51,0.01),seq(0.105,0.505,0.01),seq(0.1,0.5,0.01)))
@@ -24,7 +26,7 @@
 #
 # @export predict.dstlt
 
-dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE)
+dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE,radix=50000)
 {
   ages=rbind(ages,NA)
   if (!is.null(censorAge)) {
@@ -39,7 +41,6 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE)
   exposuress=matrix(nrow=200,ncol=periods)
   for (m in 1:periods) {
     taus[m]=which(is.na(qxs[,m]))[1]-2+start
-    radix=100000
     dx=rep(0,200)
     exposures=rep(0,200)
     for (i in 1:(which(is.na(qxs[,m]))[1]-1)) {

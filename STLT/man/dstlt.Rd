@@ -5,7 +5,7 @@
 \title{Fit the Dyanmic Smooth Threshold Life Table}
 \usage{
 dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL,
-  hessian = FALSE)
+  hessian = FALSE, radix = 50000)
 }
 \arguments{
 \item{ages}{Matrix of ages that are used to fit the DSTLT. Each column should represent one cohort. There should not be missing data for any ages between the smallest and largest age.}
@@ -19,6 +19,8 @@ dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL,
 \item{censorAge}{The age at which to right-censor observations}
 
 \item{hessian}{set to TRUE for standard errors}
+
+\item{radix}{The radix for the hypothetical cohort; affects standard errors}
 }
 \description{
 This package fits the Smooth Threshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
