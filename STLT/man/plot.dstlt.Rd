@@ -4,7 +4,7 @@
 \alias{plot.dstlt}
 \title{Plot the Dyanmic Smooth Threshold Life Table}
 \usage{
-\method{plot}{dstlt}(x, main = "", ...)
+\method{plot}{dstlt}(x, main = "", sub = "", ...)
 }
 \arguments{
 \item{x}{a model object of class dstlt}

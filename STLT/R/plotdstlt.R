@@ -12,7 +12,7 @@
 #'
 #' @export
 
-plot.dstlt=function(x,main='',...){
+plot.dstlt=function(x,main='',sub='',...){
   a=x$coefficients$a
   b=x$coefficients$b
   thet=x$coefficients$theta
@@ -32,7 +32,7 @@ plot.dstlt=function(x,main='',...){
     gompqx1=(exp(-B/log(C)*(C^X[1:((N-start)*100+1-100)]-1))-exp(-B/log(C)*(C^X[101:((N-(start-1))*100+1-100)]-1)))/exp(-B/log(C)*(C^X[1:((N-start)*100+1-100)]-1))
     gompqx2=(-1+exp(-B/log(C)*(C^X[((N-start)*100+2-100):((N-start)*100+1)]-1))+1-(exp(-B/log(C)*(C^N-1)))*(1+gam*(X[((N-start)*100+2):((N-start)*100+1+100)]-N)/thet)^(-1/gam))/exp(-B/log(C)*(C^X[((N-start)*100+2-100):((N-start)*100+1)]-1))
     paretoqx=(exp(-(X[((N-start)*100+2):(5400+1)]-N)/thet)-exp(-(X[((N-(start-1))*100+2):(5500+1)]-N)/thet))/exp(-(X[((N-start)*100+2):(5400+1)]-N)/thet)
-    plot(X[1:(5400+1)],c(gompqx1,gompqx2,paretoqx),type="n",xlab="Age", ylab="qx",main=main, col='green',ylim=c(0,1))
+    plot(X[1:(5400+1)],c(gompqx1,gompqx2,paretoqx),type="n",xlab="Age", ylab="qx",main=main, col='green',ylim=c(0,1),sub=sub)
 
     for (t in 1:periods) {
       B=exp(a+b*t)
@@ -52,7 +52,7 @@ plot.dstlt=function(x,main='',...){
       C=1/(thet*B)^(1/N)
       gompqx=(exp(-B/log(C)*(C^X[1:((N-start)*100+1)]-1))-exp(-B/log(C)*(C^X[101:((N-(start-1))*100+1)]-1)))/exp(-B/log(C)*(C^X[1:((N-start)*100+1)]-1))
       paretoqx=((1+gam*(X[((N-start)*100+2):(100*((floor(100*(N-thet/gam))/100)-start)+1)]-N)/thet)^(-1/gam)-(1+gam*(X[((N-(start-1))*100+2):(100*((floor(100*(N-thet/gam))/100)-(start-1))+1)]-N)/thet)^(-1/gam))/(1+gam*(X[((N-start)*100+2):(100*((floor(100*(N-thet/gam))/100)-start)+1)]-N)/thet)^(-1/gam)
-      plot(X[1:(100*((floor(100*(N-thet/gam))/100)-start)+1)],c(gompqx,paretoqx),type="n",xlab="Age", ylab="qx",main=main)
+      plot(X[1:(100*((floor(100*(N-thet/gam))/100)-start)+1)],c(gompqx,paretoqx),type="n",xlab="Age", ylab="qx",main=main,sub=sub)
 
       for (t in 1:periods) {
         B=exp(a+b*t)
@@ -73,7 +73,7 @@ plot.dstlt=function(x,main='',...){
       gompqx1=(exp(-B/log(C)*(C^X[1:((N-start)*100+1-100)]-1))-exp(-B/log(C)*(C^X[101:((N-(start-1))*100+1-100)]-1)))/exp(-B/log(C)*(C^X[1:((N-start)*100+1-100)]-1))
       gompqx2=(-1+exp(-B/log(C)*(C^X[((N-start)*100+2-100):((N-start)*100+1)]-1))+1-(exp(-B/log(C)*(C^N-1)))*(1+gam*(X[((N-start)*100+2):((N-start)*100+1+100)]-N)/thet)^(-1/gam))/exp(-B/log(C)*(C^X[((N-start)*100+2-100):((N-start)*100+1)]-1))
       paretoqx=((1+gam*(X[((N-start)*100+2):(5400+1)]-N)/thet)^(-1/gam)-(1+gam*(X[((N-(start-1))*100+2):(5500+1)]-N)/thet)^(-1/gam))/(1+gam*(X[((N-start)*100+2):(5400+1)]-N)/thet)^(-1/gam)
-      plot(X[1:(5400+1)],c(gompqx,paretoqx),type="n",col='blue',main=main,xlab="Age", ylab="qx",ylim=c(0,1))
+      plot(X[1:(5400+1)],c(gompqx,paretoqx),type="n",col='blue',main=main,xlab="Age", ylab="qx",ylim=c(0,1),sub=sub)
 
       for (t in 1:periods) {
         B=exp(a+b*t)
