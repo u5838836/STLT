@@ -16,7 +16,7 @@
 #'
 #' @return NULL
 #'
-#' @examples dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01))
+#' @examples dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.11,0.51,0.01),seq(0.105,0.505,0.01),seq(0.1,0.5,0.01)))
 #'
 #' @export dstlt
 #
@@ -28,20 +28,20 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE)
 {
   ages=rbind(ages,NA)
   if (!is.null(censorAge)) {
-  qxs=qxs[1:which(qxs[,1]==censorAge),]
+  qxs=qxs[1:which(ages[,1]==censorAge),]
   }
   qxs=rbind(qxs,NA)
   periods=ncol(ages)
   start=ages[1,1]
   ltaus=rep(0,periods)
   taus=rep(0,periods)
-  dxs=matrix(nrow=50,ncol=periods)
-  exposuress=matrix(nrow=50,ncol=periods)
+  dxs=matrix(nrow=200,ncol=periods)
+  exposuress=matrix(nrow=200,ncol=periods)
   for (m in 1:periods) {
     taus[m]=which(is.na(qxs[,m]))[1]-2+start
     radix=100000
-    dx=rep(0,50)
-    exposures=rep(0,50)
+    dx=rep(0,200)
+    exposures=rep(0,200)
     for (i in 1:(which(is.na(qxs[,m]))[1]-1)) {
       exposures[i]=radix
       dx[i]=qxs[i,m]*radix
