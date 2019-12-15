@@ -18,7 +18,7 @@
 #'
 #' @return NULL
 #'
-#' @examples dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.11,0.51,0.01),seq(0.105,0.505,0.01),seq(0.1,0.5,0.01)))
+#' @examples dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.11,0.51,0.01),seq(0.105,0.505,0.01),seq(0.1,0.5,0.01)),endN=95)
 #'
 #' @export dstlt
 #
@@ -59,7 +59,7 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE,radix=5
   for (N in startN:endN) {
 
     x=start:(N-1)
-    x1=start:(N)
+    x1=x+1
     x2=matrix(nrow=200,ncol=periods)
     for (i in 1:periods) {
       x2[1:length(N:taus[i]),i]=N:taus[i]
@@ -102,7 +102,7 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE,radix=5
   ####refit with optimal N####
 
   x=start:(N-1)
-  x1=(start+1):(N)
+  x1=x+1
   x2=matrix(nrow=200,ncol=periods)
   for (i in 1:periods) {
     x2[1:length(N:taus[i]),i]=N:taus[i]
@@ -114,8 +114,8 @@ dstlt<-function(ages,qxs,startN=80,endN=105,censorAge=NULL,hessian=FALSE,radix=5
     b <- theta[2]
     thet <- theta[3]
     gam <- theta[4]
-    timelike=rep(0,3)
-    for (t in 1:3) {
+    timelike=rep(0,periods)
+    for (t in 1:periods) {
       timelike[t] <- sum(dxs[1:(N-start),t]*(-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t))*(((thet*exp(a+b*t))^(-1/N))^x-1)+log(1-exp(-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t))*((thet*exp(a+b*t))^(-1/N))^x*(((thet*exp(a+b*t))^(-1/N))-1)))))+exposuress[N-(start-1),t]*((-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t)))*(((thet*exp(a+b*t))^(-1/N))^N-1))-exposuress[1,t]*((-(exp(a+b*t))/((-1/N)*(log(thet)+a+b*t)))*(((thet*exp(a+b*t))^(-1/N))^start-1))+sum(dxs[(N-(start-1)):(which(is.na(qxs[,t]))[1]-1),t]*log((1+gam*((x2[!is.na(x2[,t]),t]-N)/(1/(((thet*exp(a+b*t))^(-1/N))^N*exp(a+b*t)))))^(-1/gam)-(1+gam*((x3[!is.na(x3[,t]),t]-N)/(1/(((thet*exp(a+b*t))^(-1/N))^N*exp(a+b*t)))))^(-1/gam)))+ltaus[t]*log((1+gam*((taus[t]-N)/(1/(((thet*exp(a+b*t))^(-1/N))^N*exp(a+b*t)))))^(-1/gam))
     }
     out=sum(timelike)
