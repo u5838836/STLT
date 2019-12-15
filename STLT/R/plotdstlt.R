@@ -43,7 +43,7 @@ plot.dstlt=function(x,main='',sub='',...){
       lines(X[1:(5400+1)],c(gompqx,paretoqx),type="l",xlab="Age", ylab="qx",main=main, col=rainbow(periods)[t],xlim=c(60,120),ylim=c(0,1))
       points(start:taus[t],qxs[1:(which(is.na(qxs[,t]))[1]-1),t],col=rainbow(periods)[t])
     }
-    legend(start,0.7,legend = 1:periods, col=rainbow(periods),pch=15)
+    #legend(start,0.7,#legend = 1:periods, col=rainbow(periods),pch=15)
   } else {
     if (gam<0) {
       #if gam<0
@@ -63,7 +63,7 @@ plot.dstlt=function(x,main='',sub='',...){
         lines(X[1:(100*((floor(100*(N-thet/gam))/100)-start)+1)],c(gompqx1,gompqx2,paretoqx),type="l",col=rainbow(periods)[t])
         points(start:taus[t],qxs[1:(which(is.na(qxs[,t]))[1]-1),t],col=rainbow(periods)[t])
       }
-      legend(start,0.7,legend = 1:periods, col=rainbow(periods),pch=15)
+      #legend(start,0.7,#legend = 1:periods, col=rainbow(periods),pch=15)
     } else {
       # gam > 0
 
@@ -84,7 +84,7 @@ plot.dstlt=function(x,main='',sub='',...){
         lines(X[1:(5400+1)],c(gompqx1,gompqx2,paretoqx),type="l", col=rainbow(periods)[t], main=main,xlab="Age", ylab="qx")
         points(x,qx[1:(which(is.na(qx))[1]-1)])
       }
-      legend(start,0.7,legend = 1:periods, col=rainbow(periods),pch=15)
+      #legend(start,0.7,#legend = 1:periods, col=rainbow(periods),pch=15)
     }
   }
 }
