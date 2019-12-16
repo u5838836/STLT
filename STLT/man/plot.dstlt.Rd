@@ -13,7 +13,7 @@
 Plot fitted DSTLT lines for the cohorts used to fit the model along with corresponding observed qx
 }
 \examples{
-dstlt.mod<-dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01)))
+dstlt.mod<-dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.1,0.5,0.01),seq(0.1,0.5,0.01),seq(0.1,0.5,0.01)),endN=95)
 plot(dstlt.mod)
 
 }
