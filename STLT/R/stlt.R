@@ -1,6 +1,6 @@
 #' @title Fit the Smooth Threshold Life Table
 #'
-#' @description This package fits the Smooth Treshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
+#' @description This package fits the Smooth Threshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2020). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
 #'
 #' @param ages Vector of ages that are used to fit the STLT. There should not be missing data for any ages between the smallest and largest age.
 #'

@@ -20,7 +20,7 @@ dstlt(ages, qxs, startN = 80, endN = 105, censorAge = NULL, hessian = FALSE)
 \item{hessian}{set to TRUE for standard errors}
 }
 \description{
-This package fits the Smooth Threshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
+This package fits the Smooth Threshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2020). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
 }
 \examples{
 dstlt(cbind(60:100,60:100,60:100),cbind(seq(0.11,0.51,0.01),seq(0.105,0.505,0.01),seq(0.1,0.5,0.01)),endN=95)

@@ -1,6 +1,6 @@
-#' @title Fit the Smooth Threshold Life Table
+#' @title Compare models
 #'
-#' @description This package fits the Smooth Treshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
+#' @description Compare prediction accuracy of qx between different methods using root mean squared error, mean absolute error, weighted root mean squared error and weighted mean absolute error.
 #'
 #' @param qx Vector of observed mortality rates; ages should be integer values and sequential
 #'
@@ -21,6 +21,11 @@
 compare_methods<-function(qx, pred_qx, wx=NULL){
   if (length(qx) != nrow(pred_qx)) stop("qx length must match number of rows in pred_qx")
 
+  # If no weights provided at all, use 1
+  if (is.null(wx)) {
+    wx <- 1
+  }
+
   # If wx is a single number, generate weights using survival rule
   if (!is.null(wx) && length(wx) == 1) {
     w_full <- numeric(length(qx))
@@ -29,11 +34,6 @@ compare_methods<-function(qx, pred_qx, wx=NULL){
       w_full[i] <- w_full[i - 1] * (1 - qx[i - 1])
     }
     wx <- w_full
-  }
-
-  # If no weights provided at all, use uniform weights
-  if (is.null(wx)) {
-    wx <- rep(1, length(qx))
   }
 
   # Normalize weights to sum to 1

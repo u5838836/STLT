@@ -2,7 +2,7 @@
 % Please edit documentation in R/comparemethods.R
 \name{compare_methods}
 \alias{compare_methods}
-\title{Fit the Smooth Threshold Life Table}
+\title{Compare models}
 \usage{
 compare_methods(qx, pred_qx, wx = NULL)
 }
@@ -17,7 +17,7 @@ compare_methods(qx, pred_qx, wx = NULL)
 A list of prediction accuracy measures
 }
 \description{
-This package fits the Smooth Treshold Life Table and Dyanmic Smooth Threshold Life Table, as in Huang et al., (2019). Fitted and predicted qx as well as their plots are provided. No right censoring is applied and all possible ages are considered when estimating the threshold age N.
+Compare prediction accuracy of qx between different methods using root mean squared error, mean absolute error, weighted root mean squared error and weighted mean absolute error.
 }
 \examples{
 qx <- c(0.1, 0.2, 0.15, 0.3)
