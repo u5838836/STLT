@@ -6,11 +6,13 @@
 #'
 #' @param newdata Vector of ages for which qx are to be predicted
 #'
+#' @param ... Additional arguments passed to methods
+#'
 #' @return Vector of predicted qx under the fitted STLT model
 #'
 #' @examples
 #' stlt.mod<-stlt(60:100,seq(0.1,0.5,0.01))
-#' predict.stlt(stlt.mod,65:90)
+#' predict(stlt.mod,65:90)
 #'
 #' @export
 

@@ -4,6 +4,11 @@
 #'
 #' @param x An stlt model object
 #'
+#' @param main title of plot
+#'
+#' @param sub subtitle of plot
+#'
+#' @param ... Additional arguments passed to methods
 #'
 #' @return NULL
 #'

@@ -8,6 +8,12 @@
 }
 \arguments{
 \item{x}{a model object of class dstlt}
+
+\item{main}{title of plot}
+
+\item{sub}{subtitle of plot}
+
+\item{...}{Additional arguments passed to methods}
 }
 \description{
 Plot fitted DSTLT lines for the cohorts used to fit the model along with corresponding observed qx

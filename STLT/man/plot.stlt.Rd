@@ -8,6 +8,12 @@
 }
 \arguments{
 \item{x}{An stlt model object}
+
+\item{main}{title of plot}
+
+\item{sub}{subtitle of plot}
+
+\item{...}{Additional arguments passed to methods}
 }
 \description{
 Plots the fitted threshold life table line and corresponding observed qx used for fitting the model.

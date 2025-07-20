@@ -10,6 +10,8 @@
 \item{object}{an STLT model object}
 
 \item{newdata}{Vector of ages for which qx are to be predicted}
+
+\item{...}{Additional arguments passed to methods}
 }
 \value{
 Vector of predicted qx under the fitted STLT model
@@ -19,6 +21,6 @@ For a given STLT fit, this function computes the qx associated with any particul
 }
 \examples{
 stlt.mod<-stlt(60:100,seq(0.1,0.5,0.01))
-predict.stlt(stlt.mod,65:90)
+predict(stlt.mod,65:90)
 
 }

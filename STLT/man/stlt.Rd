@@ -4,8 +4,15 @@
 \alias{stlt}
 \title{Fit the Smooth Threshold Life Table}
 \usage{
-stlt(ages, qx, startN = 0, endN = 200, censorAge = NULL,
-  hessian = FALSE, radix = 50000)
+stlt(
+  ages,
+  qx,
+  startN = 0,
+  endN = 200,
+  censorAge = NULL,
+  hessian = FALSE,
+  radix = 50000
+)
 }
 \arguments{
 \item{ages}{Vector of ages that are used to fit the STLT. There should not be missing data for any ages between the smallest and largest age.}

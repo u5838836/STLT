@@ -4,6 +4,12 @@
 #'
 #' @param x a model object of class dstlt
 #'
+#' @param main title of plot
+#'
+#' @param sub subtitle of plot
+#'
+#' @param ... Additional arguments passed to methods
+#'
 #' @return NULL
 #'
 #' @examples

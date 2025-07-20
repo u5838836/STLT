@@ -12,6 +12,8 @@
 \item{newdata}{vector of ages at which qx are to be predicted}
 
 \item{t}{the time period for which qx are to be predicted.t=1 corresponds to the earliest year to which the DSTLT model was fit; t=2 to the second earliest, etc.}
+
+\item{...}{Additional arguments passed to methods}
 }
 \value{
 A vector of predicted qx for a given numeric time period under the fitted DSTLT model
