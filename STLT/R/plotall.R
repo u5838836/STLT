@@ -11,20 +11,20 @@
 #' @return Plot of fitted lines for chosen laws and STLT
 #'
 #' @examples
-#' compare_all(60:100,seq(0.1,0.5,0.01),c('HP2','gompertz'),10000)
+#' plot_all(60:100,seq(0.1,0.5,0.01),c('HP2','gompertz'))
 #'
 #' @export plot_all
 
 plot_all<-function(x, qx, laws){
   stlt_mod = stlt(ages = x, qx = qx)
   start=stlt_mod$Start
-  plot_ages = seq(start=stlt_mod$Start,120,0.01)
+  plot_ages = seq(start,120,0.01)
   plot(stlt_mod)
 
-  for (i in length(laws)) {
+  for (i in 1:length(laws)) {
     pred = get_qx(x=x,qx=qx,law=laws[i],pred_ages=plot_ages)
     lines(plot_ages,pred,col=i+1)
   }
 
-  legend("topright", legend = c('STLT',laws), col = 2:(length(laws)+1))
+  legend("topright", legend = c('STLT',laws), col = 1:(length(laws)+1), lty = 1)
 }

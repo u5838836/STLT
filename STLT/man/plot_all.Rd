@@ -20,6 +20,6 @@ Plot of fitted lines for chosen laws and STLT
 Plot any number of models fit using the MortalityLaws package and the STLT
 }
 \examples{
-compare_all(60:100,seq(0.1,0.5,0.01),c('HP2','gompertz'),10000)
+plot_all(60:100,seq(0.1,0.5,0.01),c('HP2','gompertz'))
 
 }

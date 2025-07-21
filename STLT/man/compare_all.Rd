@@ -4,7 +4,7 @@
 \alias{compare_all}
 \title{Compare any number of models}
 \usage{
-compare_all(x, qx, laws, wx)
+compare_all(x, qx, laws, wx = NULL)
 }
 \arguments{
 \item{x}{Vector of ages at the beginning of the age interval}

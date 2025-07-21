@@ -17,14 +17,14 @@
 #'
 #' @export compare_all
 
-compare_all<-function(x,qx,laws,wx){
+compare_all<-function(x,qx,laws,wx=NULL){
   stlt_mod = stlt(ages = x, qx = qx)
   stlt_preds = predict(stlt_mod, newdata = x)
 
   law_preds = matrix(nrow=length(x), ncol=length(laws))
-  for (i in length(laws)) {
+  for (i in 1:length(laws)) {
     pred = get_qx(x=x,qx=qx,law=laws[i],pred_ages=x)
-    law_preds[,i]
+    law_preds[,i] = pred
   }
   colnames(law_preds) = laws
 
