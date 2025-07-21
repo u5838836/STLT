@@ -4,22 +4,24 @@
 \alias{compare_all}
 \title{Compare any number of models}
 \usage{
-compare_all(x, qx, laws, wx = NULL)
+compare_all(x, qx, laws, wx = NULL, compare_ages = NULL)
 }
 \arguments{
-\item{x}{Vector of ages at the beginning of the age interval}
+\item{x}{Vector of ages at the beginning of the age interval.}
 
-\item{qx}{Vector of observed mortality rates}
+\item{qx}{Vector of observed mortality rates.}
 
-\item{laws}{Vector of strings that indicate which laws to compare}
+\item{laws}{Vector of strings that indicate which laws to compare.}
 
 \item{wx}{Vector of weights for the weighted prediction error measures. Usually the cohort size at each x. Can be a scalar indicating the cohort size at the first age - subsequent weights will then be calculated using the observed qx}
+
+\item{compare_ages}{Vector of ages to restrict the comparison to.}
 }
 \value{
-Comparison of prediction accuracy measures for chosen laws and STLT
+Comparison of prediction accuracy measures for chosen laws and STLT.
 }
 \description{
-Compare any number of models fit using the MortalityLaws package and the STLT
+Compare any number of models fit using the MortalityLaws package and the STLT.
 }
 \examples{
 compare_all(60:100,seq(0.1,0.5,0.01),c('HP2','gompertz'),10000)

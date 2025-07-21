@@ -2,22 +2,22 @@
 % Please edit documentation in R/plotall.R
 \name{plot_all}
 \alias{plot_all}
-\title{Plot any number of models}
+\title{Plot fitted lines of any number of models}
 \usage{
 plot_all(x, qx, laws)
 }
 \arguments{
-\item{x}{Vector of ages at the beginning of the age interval}
+\item{x}{Vector of ages at the beginning of the age interval.}
 
-\item{qx}{Vector of observed mortality rates}
+\item{qx}{Vector of observed mortality rates.}
 
-\item{laws}{Vector of strings that indicate which laws to plot}
+\item{laws}{Vector of strings that indicate which laws to plot.}
 }
 \value{
-Plot of fitted lines for chosen laws and STLT
+Plot of fitted lines for chosen laws and STLT.
 }
 \description{
-Plot any number of models fit using the MortalityLaws package and the STLT
+Plot any number of models fit using the MortalityLaws package and the STLT.
 }
 \examples{
 plot_all(60:100,seq(0.1,0.5,0.01),c('HP2','gompertz'))

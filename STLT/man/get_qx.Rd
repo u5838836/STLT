@@ -7,19 +7,19 @@
 get_qx(x, qx, law, pred_ages)
 }
 \arguments{
-\item{x}{Vector of ages at the beginning of the age interval}
+\item{x}{Vector of ages at the beginning of the age interval.}
 
-\item{qx}{Vector of observed mortality rates}
+\item{qx}{Vector of observed mortality rates.}
 
-\item{law}{The law to get predictions from - see MortalityLaws package}
+\item{law}{The law to get predictions from - see MortalityLaws package.}
 
-\item{pred_ages}{ages at which to predict qx}
+\item{pred_ages}{Ages at which to predict qx.}
 }
 \value{
-predicted qx from chosen law
+Predicted qx at pred_ages from chosen law.
 }
 \description{
-Extract predicted qx from models fit using the MortalityLaws package
+Extract predicted qx from models fit using the MortalityLaws package.
 }
 \examples{
 qx <- seq(0.1,0.5,0.01)

@@ -2,19 +2,19 @@
 % Please edit documentation in R/comparemethods.R
 \name{compare_methods}
 \alias{compare_methods}
-\title{Compare models}
+\title{Compare prediction performance of different models}
 \usage{
 compare_methods(qx, pred_qx, wx = NULL)
 }
 \arguments{
-\item{qx}{Vector of observed mortality rates; ages should be integer values and sequential}
+\item{qx}{Vector of observed mortality rates; ages should be integer values and sequential.}
 
 \item{pred_qx}{A matrix of predicted qx, corresponding to the ages of the observed qx. Each column should correspond to a different method used to predict qx.}
 
 \item{wx}{Vector of weights for the weighted prediction error measures. Usually the cohort size at each x. Can be a scalar indicating the cohort size at the first age - subsequent weights will then be calculated using the observed qx.}
 }
 \value{
-A list of prediction accuracy measures
+A matrix of prediction accuracy measures by model.
 }
 \description{
 Compare prediction accuracy of qx between different methods using root mean squared error, mean absolute error, weighted root mean squared error and weighted mean absolute error.

@@ -1,14 +1,14 @@
-#' @title Compare models
+#' @title Compare prediction performance of different models
 #'
 #' @description Compare prediction accuracy of qx between different methods using root mean squared error, mean absolute error, weighted root mean squared error and weighted mean absolute error.
 #'
-#' @param qx Vector of observed mortality rates; ages should be integer values and sequential
+#' @param qx Vector of observed mortality rates; ages should be integer values and sequential.
 #'
 #' @param wx Vector of weights for the weighted prediction error measures. Usually the cohort size at each x. Can be a scalar indicating the cohort size at the first age - subsequent weights will then be calculated using the observed qx.
 #'
 #' @param pred_qx A matrix of predicted qx, corresponding to the ages of the observed qx. Each column should correspond to a different method used to predict qx.
 #'
-#' @return A list of prediction accuracy measures
+#' @return A matrix of prediction accuracy measures by model.
 #'
 #' @examples
 #' qx <- c(0.1, 0.2, 0.15, 0.3)

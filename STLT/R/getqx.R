@@ -1,16 +1,16 @@
 #' @title Get predictions from MortalityLaws models
 #'
-#' @description Extract predicted qx from models fit using the MortalityLaws package
+#' @description Extract predicted qx from models fit using the MortalityLaws package.
 #'
-#' @param x Vector of ages at the beginning of the age interval
+#' @param x Vector of ages at the beginning of the age interval.
 #'
-#' @param qx Vector of observed mortality rates
+#' @param qx Vector of observed mortality rates.
 #'
-#' @param law The law to get predictions from - see MortalityLaws package
+#' @param law The law to get predictions from - see MortalityLaws package.
 #'
-#' @param pred_ages ages at which to predict qx
+#' @param pred_ages Ages at which to predict qx.
 #'
-#' @return predicted qx from chosen law
+#' @return Predicted qx at pred_ages from chosen law.
 #'
 #' @examples
 #' qx <- seq(0.1,0.5,0.01)
